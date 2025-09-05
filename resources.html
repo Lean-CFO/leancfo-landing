@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>お役立ち情報 - Lean CFO</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="Lean CFO シンボルマーク.png">
+    <link rel="apple-touch-icon" href="Lean CFO シンボルマーク.png">
+    
+    <meta name="description" content="Lean CFOのお役立ち情報。スタートアップ向けの経営管理資料、テンプレート、ガイドブックを無料でダウンロードできます。">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Yu Gothic', 'Meiryo', sans-serif;
+            line-height: 1.6;
+            color: #2d3748;
+            background-color: #f7fafc;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .header {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 0;
+        }
+
+        .logo-image {
+            height: 50px;
+            width: auto;
+        }
+
+        .logo a {
+            text-decoration: none;
+        }
+
+        .nav {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-list {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: #4a5568;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            font-size: 16px;
+            line-height: 1.5;
+            letter-spacing: 0.5px;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: #1a365d;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: #1a365d;
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Main Content */
+        .main {
+            padding: 80px 0;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .page-title {
+            font-size: 48px;
+            font-weight: 700;
+            color: #1a365d;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .page-description {
+            font-size: 18px;
+            color: #4a5568;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Coming Soon Section */
+        .coming-soon {
+            background: white;
+            border-radius: 12px;
+            padding: 60px 40px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+        }
+
+        .coming-soon h2 {
+            font-size: 32px;
+            color: #1a365d;
+            margin-bottom: 20px;
+        }
+
+        .coming-soon p {
+            font-size: 18px;
+            color: #4a5568;
+            margin-bottom: 30px;
+        }
+
+        .back-button {
+            display: inline-block;
+            background: #3b82f6;
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: background 0.3s ease;
+        }
+
+        .back-button:hover {
+            background: #2563eb;
+        }
+
+        /* Footer */
+        .footer {
+            background: #1a365d;
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        .footer p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 14px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-list {
+                display: none;
+            }
+
+            .page-title {
+                font-size: 36px;
+            }
+
+            .coming-soon {
+                padding: 40px 20px;
+            }
+
+            .coming-soon h2 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="Lean CFO ロゴ.png" alt="Lean CFO" class="logo-image">
+                    </a>
+                </div>
+                <nav class="nav">
+                    <ul class="nav-list">
+                        <li><a href="index.html#problems" class="nav-link">課題</a></li>
+                        <li><a href="index.html#why-us" class="nav-link">選ばれる理由</a></li>
+                        <li><a href="index.html#services" class="nav-link">サービス</a></li>
+                        <li><a href="index.html#phase" class="nav-link">フェーズ別支援</a></li>
+                        <li><a href="index.html#team" class="nav-link">メンバー</a></li>
+                        <li><a href="index.html#faq" class="nav-link">よくある質問</a></li>
+                        <li><a href="index.html#contact-form" class="nav-link">お問い合わせ</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <div class="page-header">
+                <h1 class="page-title">お役立ち情報</h1>
+                <p class="page-description">スタートアップ向けの経営管理資料、テンプレート、ガイドブックを無料でダウンロードできます。</p>
+            </div>
+
+            <div class="coming-soon">
+                <h2>準備中です</h2>
+                <p>お役立ち情報の詳細は準備中です。<br>近日中に公開予定ですので、今しばらくお待ちください。</p>
+                <a href="index.html" class="back-button">トップページに戻る</a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>© 2024 Lean CFO. 無断転載を禁じます。</p>
+        </div>
+    </footer>
+</body>
+
+</html>
