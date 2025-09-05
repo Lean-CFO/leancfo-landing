@@ -1,0 +1,109 @@
+﻿/***** 設定 *****/
+const TO = 'contact@evolica.jp'; // ←受信先に変更
+const SPREADSHEET_ID = '1eADUEIM4PX2ax-7ArsQg0-sdwEEieXk3CQRmXWBRYRo';
+const SHEET_NAME = 'Applications';
+/****************/
+
+// ★ポイント：Apps Scriptでは「function 宣言」でグローバル定義すること（const doPost = … はNG）
+function doPost(e) {
+  try {
+    // 受信データ（JSONもフォームも対応）
+    const data = (() => {
+      if (e && e.postData && e.postData.type === 'application/json') {
+        return JSON.parse(e.postData.contents || '{}');
+      }
+      const p = Object.assign({}, e ? e.parameter || {} : {});
+      if (e && e.parameters) {
+        if (e.parameters['issues[]']) p.issues = e.parameters['issues[]'];
+        if (e.parameters['issues'])   p.issues = e.parameters['issues'];
+      }
+      return p;
+    })();
+
+    // ハニーポット
+    if ((data.website || '').trim()) {
+      return ContentService.createTextOutput('OK');
+    }
+
+    // 必須チェック
+    if (!data.company || !data.person_name || !data.email) {
+      throw new Error('必須項目が未入力です');
+    }
+    const privacyVal = String(data.privacy || '').toLowerCase();
+    if (!['yes','on','true','1'].includes(privacyVal)) {
+      throw new Error('プライバシーポリシー未同意');
+    }
+
+    // 正規化
+    const toArray = v => Array.isArray(v) ? v : (v ? [v] : []);
+    const payload = {
+      company:       data.company       || '',
+      industry:      data.industry      || '',
+      person_name:   data.person_name   || '',
+      title:         data.title         || '',
+      email:         data.email         || '',
+      phone:         data.phone         || '',
+      employees:     data.employees     || '',
+      funding_stage: data.funding_stage || '',
+      issues:        toArray(data.issues).join(', '),
+      details:       data.details       || '',
+      urgency:       data.urgency       || ''
+    };
+
+    // Gmail通知
+    const subject = `【申込み】${payload.company} / ${payload.person_name}`;
+    const body =
+`会社名: ${payload.company}
+業界: ${payload.industry}
+お名前: ${payload.person_name}
+役職: ${payload.title}
+メール: ${payload.email}
+電話番号: ${payload.phone}
+従業員数: ${payload.employees}
+資金調達段階: ${payload.funding_stage}
+現在抱えている課題: ${payload.issues}
+緊急度: ${payload.urgency}
+--------------------------------
+詳細・ご質問:
+${payload.details}
+`;
+    GmailApp.sendEmail(TO, subject, body, payload.email ? { replyTo: payload.email } : {});
+
+    // シート追記（ヘッダー自動）
+    const ss = SpreadsheetApp.openById(SPREADSHEET_ID);
+    const sh = ss.getSheetByName(SHEET_NAME) || ss.insertSheet(SHEET_NAME);
+    if (sh.getLastRow() === 0) {
+      sh.appendRow([
+        'timestamp','company','industry','person_name','title','email','phone',
+        'employees','funding_stage','issues','details','urgency'
+      ]);
+    }
+    sh.appendRow([
+      new Date(), payload.company, payload.industry, payload.person_name, payload.title,
+      payload.email, payload.phone, payload.employees, payload.funding_stage,
+      payload.issues, payload.details, payload.urgency
+    ]);
+
+    // レスポンス
+    const redirect = data.redirect || '';
+    if (redirect) {
+      return HtmlService.createHtmlOutput(
+        `<!doctype html><meta charset="utf-8"><p>送信しました。移動します…</p>
+         <script>location.href=${JSON.stringify(redirect)};</script>`
+      );
+    }
+    return ContentService.createTextOutput(JSON.stringify({ ok:true }))
+                         .setMimeType(ContentService.MimeType.JSON);
+
+  } catch (err) {
+    return ContentService.createTextOutput(JSON.stringify({ ok:false, error:String(err) }))
+                         .setMimeType(ContentService.MimeType.JSON);
+  }
+}
+
+// GETで開いた場合の確認用（URLをブラウザで開いてもエラーにしない）
+function doGet() {
+  return HtmlService.createHtmlOutput(
+    '<!doctype html><meta charset="utf-8"><p>GASは稼働中です（POSTで送信してください）。</p>'
+  );
+}

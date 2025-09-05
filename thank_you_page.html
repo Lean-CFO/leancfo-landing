@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>お問い合わせありがとうございます - Lean CFO</title>
+    <meta name="description" content="お問い合わせいただき、ありがとうございます。担当者より24時間以内にご連絡いたします。">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #fff;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .header {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo h1 {
+            color: #667eea;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .logo a {
+            text-decoration: none;
+        }
+
+        .nav-list {
+            display: flex;
+            list-style: none;
+            gap: 40px;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: #4a5568;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: #667eea;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: #4a5568;
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .page-title {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .page-subtitle {
+            font-size: 1.3rem;
+            opacity: 0.9;
+        }
+
+        /* Thank You Section */
+        .thank-you-section {
+            padding: 120px 0;
+            background: #f8fafc;
+        }
+
+        .thank-you-content {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .success-card {
+            background: #d4edda;
+            color: #155724;
+            padding: 3rem 2rem;
+            border-radius: 20px;
+            margin-bottom: 3rem;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+        }
+
+        .success-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .success-card h2 {
+            color: #155724;
+            margin-bottom: 1rem;
+            font-size: 2rem;
+        }
+
+        .success-card p {
+            font-size: 1.125rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+
+        .success-note {
+            color: #0f5132;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .next-steps {
+            margin-bottom: 3rem;
+        }
+
+        .next-steps h3 {
+            color: #2d3748;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+
+        .steps-card {
+            text-align: left;
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .steps-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .steps-list li {
+            margin-bottom: 1rem;
+            padding-left: 2rem;
+            position: relative;
+            color: #4a5568;
+        }
+
+        .steps-list li:last-child {
+            margin-bottom: 0;
+        }
+
+        .step-number {
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: #667eea;
+            color: white;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
+            background: #5a67d8;
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #667eea;
+            border: 2px solid #667eea;
+        }
+
+        .btn-secondary:hover {
+            background: #667eea;
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        /* Footer */
+        .footer {
+            background: #2d3748;
+            color: white;
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 60px;
+            margin-bottom: 40px;
+        }
+
+        .footer-brand h3 {
+            font-size: 1.8rem;
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+
+        .footer-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+        }
+
+        .footer-column h4 {
+            margin-bottom: 20px;
+            color: #e2e8f0;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column li {
+            margin-bottom: 10px;
+        }
+
+        .footer-column a {
+            color: #a0aec0;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-column a:hover {
+            color: #667eea;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #4a5568;
+            padding-top: 30px;
+            text-align: center;
+            color: #a0aec0;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+
+            .nav {
+                display: none;
+            }
+
+            .page-title {
+                font-size: 2.5rem;
+            }
+
+            .page-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .success-card {
+                padding: 2rem 1.5rem;
+            }
+
+            .success-icon {
+                font-size: 3rem;
+            }
+
+            .success-card h2 {
+                font-size: 1.5rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 100%;
+                max-width: 280px;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .container {
+                padding: 0 15px;
+            }
+        }
+
+        /* Animation */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.6s ease-out;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="index.html">
+                        <h1>Lean CFO</h1>
+                    </a>
+                </div>
+                <nav class="nav">
+                    <ul class="nav-list">
+                        <li><a href="index.html" class="nav-link">ホーム</a></li>
+                        <li><a href="#" class="nav-link">サービス</a></li>
+                        <li><a href="#" class="nav-link">課題解決</a></li>
+                        <li><a href="contact_page.html" class="nav-link">お問い合わせ</a></li>
+                    </ul>
+                </nav>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="page-header">
+            <div class="container">
+                <h1 class="page-title">お問い合わせありがとうございます</h1>
+                <p class="page-subtitle">担当者より24時間以内にご連絡いたします</p>
+            </div>
+        </section>
+
+        <section class="thank-you-section">
+            <div class="container">
+                <div class="thank-you-content fade-in-up">
+                    <div class="success-card">
+                        <div class="success-icon">✅</div>
+                        <h2>送信完了</h2>
+                        <p>
+                            お問い合わせいただき、ありがとうございます。<br>
+                            内容を確認の上、担当者より24時間以内にご連絡いたします。
+                        </p>
+                        <p class="success-note">
+                            ※ 万が一、24時間以内にご連絡がない場合は、<br>
+                            メールアドレスの入力間違いの可能性がございます。<br>
+                            お手数ですが、再度お問い合わせください。
+                        </p>
+                    </div>
+
+                    <div class="next-steps">
+                        <h3>次のステップ</h3>
+                        <div class="steps-card">
+                            <ul class="steps-list">
+                                <li>
+                                    <span class="step-number">1.</span>
+                                    担当者がお問い合わせ内容を確認
+                                </li>
+                                <li>
+                                    <span class="step-number">2.</span>
+                                    24時間以内にメールでご連絡
+                                </li>
+                                <li>
+                                    <span class="step-number">3.</span>
+                                    無料相談の日程調整
+                                </li>
+                                <li>
+                                    <span class="step-number">4.</span>
+                                    最適なソリューションをご提案
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="cta-buttons">
+                        <a href="index.html#top" class="btn btn-primary">トップページに戻る</a>
+                        <a href="#" class="btn btn-secondary">サービス詳細を見る</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3>Lean CFO</h3>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>サービス</h4>
+                        <ul>
+                            <li><a href="#">サービス一覧</a></li>
+                            <li><a href="#">課題解決</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>お問い合わせ</h4>
+                        <ul>
+                            <li><a href="contact_page.html">お問い合わせフォーム</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Lean CFO. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.addEventListener('DOMContentLoaded', function () {
+            const hamburger = document.querySelector('.hamburger');
+            const nav = document.querySelector('.nav');
+
+            if (hamburger) {
+                hamburger.addEventListener('click', () => {
+                    nav.classList.toggle('active');
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>
